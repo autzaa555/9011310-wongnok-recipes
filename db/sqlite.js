@@ -61,7 +61,7 @@ db.serialize(() => {
           "/collection/item4.png",
         ];
 
-        const insertSql = `INSERT INTO items(name, description, img) VALUES(?, ?, ?)`;
+        const insertSql = `INSERT INTO items(name, difficulty, period, description, step, img) VALUES(?, ?, ?, ?, ?, ?)`;
 
         db.run(insertSql, values1, function (err) {
           if (err) {
