@@ -55,7 +55,7 @@ export default function Page({ params }: PageProps) {
     };
     
     return (
-        <div className="container mx-auto px-4 mt-4">
+        <div className="container mx-auto mt-20 px-4">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-1">
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     {/* id: {params.slug} */}

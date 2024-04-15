@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto mt-20 flex justify-between items-center ">
         <input
           type="text"
           placeholder="กรุณาพิมพ์ชื่อ เมนูอาหาร,วัตถุดิบ,ระยะเวลา,ความยากง่าย..."

@@ -100,7 +100,7 @@ function CreateItemForm({ params }: PageProps) {
 
 
   return (
-    <div className="max-w-md mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl shadow-md overflow-hidden md:max-w-2x1">
+    <div className="max-w-md mx-auto mt-20 bg-gradient-to-r from-violet-500 to-yellow-600 rounded-xl shadow-md overflow-hidden md:max-w-2x1">
       <div className="md:flex flex-col" >
         {/* <div className="md:flex-shrink-0">
         <img className="h-48 w-full object-cover md:w-48" src={formData.img} alt="Item Image" /> 
@@ -108,20 +108,21 @@ function CreateItemForm({ params }: PageProps) {
         <div className="p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">ชื่อเมนู :</label>
+              <label htmlFor="name" className="block text-sm font-bold text-gray-700">ชื่อเมนู :</label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                placeholder="ชื่อเมนู"
                 required
                 className="mt-1 p-2 block w-full border-black rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
 
             <div>
-              <label htmlFor="difficulty" className="block text-sm font-medium text-gray-700">ความยากง่ายขอเมนู :</label>
+              <label htmlFor="difficulty" className="block text-sm font-bold text-gray-700">ความยากง่ายขอเมนู :</label>
               <select
                 id="difficulty"
                 name="difficulty"
@@ -137,7 +138,7 @@ function CreateItemForm({ params }: PageProps) {
             </div>
 
             <div>
-              <label htmlFor="period" className="block text-sm font-medium text-gray-700">ระยะเวลาที่ใช้ในการปรุงอาหาร :</label>
+              <label htmlFor="period" className="block text-sm font-bold text-gray-700">ระยะเวลาที่ใช้ในการปรุงอาหาร :</label>
               <select id="period" name='period' value={formData.period} onChange={handleChange} className="mt-1 p-2 block w-full border-black rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 <option value="">เลือกประมาณเวลาที่ใช้</option>
                 <option value="5 - 15 นาที">5 - 15 นาที</option>
@@ -152,24 +153,26 @@ function CreateItemForm({ params }: PageProps) {
 
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700">วุตถุดิบ/ส่วนผสม :</label>
+              <label htmlFor="description" className="block text-sm font-bold text-gray-700">วุตถุดิบ/ส่วนผสม :</label>
               <textarea
                 id="description"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
+                placeholder="วุตถุดิบ/ส่วนผสม"
                 required
                 className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
 
             <div>
-              <label htmlFor="step" className="block text-sm font-medium text-gray-700">ขั้นตอนการทำ :</label>
+              <label htmlFor="step" className="block text-sm font-bold text-gray-700">ขั้นตอนการทำ :</label>
               <textarea
                 id="step"
                 name="step"
                 value={formData.step}
                 onChange={handleChange}
+                placeholder="ขั้นตอนการทำ"
                 required
                 className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
@@ -181,7 +184,7 @@ function CreateItemForm({ params }: PageProps) {
 
 
             <div>
-              <label htmlFor="img" className="block text-sm font-medium text-gray-700">เลือกภาพเมนูอาหาร :</label>
+              <label htmlFor="img" className="block text-sm font-bold text-gray-700">เลือกภาพเมนูอาหาร :</label>
               <div className="flex items-center">
                 {
                   !isChangeImage ? (
@@ -197,7 +200,7 @@ function CreateItemForm({ params }: PageProps) {
                     />
                   ) : (
                     <>
-                      {/* <label htmlFor="img" className="block text-sm font-medium text-gray-700">เลือกภาพเมนูอาหาร :</label> */}
+                      {/* <label htmlFor="img" className="block text-sm font-bold text-gray-700">เลือกภาพเมนูอาหาร :</label> */}
                       <input
                         disabled={false}
                         type="file"

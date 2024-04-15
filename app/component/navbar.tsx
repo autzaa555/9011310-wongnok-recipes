@@ -1,19 +1,14 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Item } from "@/app/interface/item";
-
-
 
 
 export default function Navbar(){
 
 
-
-
   return (
-    <nav className="bg-purple-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="bg-purple-800 p-4 bg-gradient-to-r from-violet-500 to-yellow-600 fixed top-0 w-full z-10">
+      <div className="container mx-auto  flex justify-between items-center">
         {/* <div className="flex space-x-1">
           <input
             type="text"
@@ -28,15 +23,15 @@ export default function Navbar(){
         </div> */}
 
         <div className="flex space-x-10">
-          <Link href="/" className="text-white">
+          <Link href="/" className="text-white font-bold">
             หน้าแรก
           </Link>
 
-          <Link href="/menu/create" className="text-white">
+          <Link href="/menu/create" className="text-white font-bold">
             สร้างเมนู
           </Link>
 
-          <Link href="/" className="text-white">
+          <Link href="/login" className="text-white font-bold">
             เข้าสู่ระบบ
           </Link>
         </div>
