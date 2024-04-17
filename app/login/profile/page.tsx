@@ -15,7 +15,7 @@ export default async function Page() {
   await wait(1000);
 
   return (
-    <>
+    // <>
 
 
       <div className="w-full flex flex-col items-center justify-center min-h-screen py-2">
@@ -26,9 +26,9 @@ export default async function Page() {
       <GoogleSignOut/>
 
                 </div>
-            </div>
+             </div>
 
 
-    </>
+    // </>
   );
 }

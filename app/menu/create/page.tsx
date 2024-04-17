@@ -1,19 +1,35 @@
+
+  // 'use server'
 'use client'
 import React, { useState, useEffect } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { Menu } from "@/app/interface/menu";
 import { SessionProvider, useSession } from "next-auth/react";
-import { authConfig, loginIsRequiredServer } from "@/app/lib/auth";
+import { authConfig, loginIsRequiredClient, loginIsRequiredServer } from "@/app/lib/auth";
+import { getServerSession } from "next-auth/next"
+import SignInPage from "@/app/login/page";
+// import { authConfig } from '@/app/lib/auth'
 
 
 
-// const CreateItemForm = () => {
+
+
  function CreateItemForm(){
-    // await loginIsRequiredServer();
-
-
 
   const router = useRouter();
+  const session = useSession();
+    useEffect(() => {
+    //  console.log(session) 
+     if (session.status == "unauthenticated" ){ 
+      alert("กรุณาเข้าสู่ระบบก่อน!");
+     router.push("/login");
+     }
+    }, []);
+
+
+
+
+
   const [formData, setFormData] = useState<Menu>({
     id: 0,
     name: "",

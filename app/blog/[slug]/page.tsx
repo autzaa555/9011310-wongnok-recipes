@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 async function getBlog(slug: string) {
     const response = await fetch(`http://localhost:3000/api/menus?id=${slug}`);
@@ -32,28 +33,51 @@ export default function Page({ params }: PageProps) {
         fetchData();
     }, []);
 
+
+    const [showButtonDel, setShowButtonDel] = useState(true);
+    const [showButtonEdit, setShowButtonEdit] = useState(true);
     const router = useRouter();
+    const session = useSession();
+    useEffect(() => {
+        //  console.log(session) 
+        if (session.status == "unauthenticated") {
+            // router.push("/login");
+            // Hide the button after handling delete
+            setShowButtonDel(false);
+            setShowButtonEdit(false);
+        }
+    }, [session]);
+
+
 
     const handleDelete = async () => {
-        // ทำการลบโพสต์ที่มี id เป็น params.slug ที่ต้องการลบ
-        try {
-            const response = await fetch(`http://localhost:3000/api/menus?id=${params.slug}`, {
-                method: "DELETE"
-            });
+        // Ask for confirmation before deleting
+        const confirmDelete = window.confirm(`ยืนยันการลบรายการนี้ใช่หรือไม่?`);
 
-            if (!response.ok) {
-                throw new Error("Failed to delete item");
+        if (confirmDelete) {
+            // Proceed with deletion if confirmed
+            try {
+                const response = await fetch(`http://localhost:3000/api/menus?id=${params.slug}`, {
+                    method: "DELETE",
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to delete item");
+                }
+
+                alert("Item deleted successfully!");
+                router.push("/"); // Redirect to homepage
+            } catch (error) {
+                console.error("Error deleting item:", error);
+                alert("Failed to delete item. Please try again.");
             }
-
-            alert("Item deleted successfully!");
-            // อัปเดตข้อมูลหลังจากลบสำเร็จ
-            router.push("/"); // พากลับไปที่หน้าแรก
-        } catch (error) {
-            console.error("Error deleting item:", error);
-            alert("Failed to delete item. Please try again.");
+        } else {
+            // Cancel deletion if not confirmed
+            alert("การลบถูกยกเลิก");
         }
     };
-    
+
+
     return (
         <div className="container mx-auto mt-20 px-4">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-1">
@@ -79,12 +103,16 @@ export default function Page({ params }: PageProps) {
                                             </button>
                                         </Link>
                                         <div>
-                                            <button onClick={handleDelete} className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300">
-                                                ลบ
-                                            </button>
-                                            <button onClick={() => router.push(`/menu/edit/${item.id}`)} className="px-4 py-2 bg-orange-500 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300">
-                                                แก้ไข
-                                            </button>
+                                            {showButtonDel && (
+                                                <button onClick={handleDelete} className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300">
+                                                    ลบ
+                                                </button>
+                                            )}
+                                            {showButtonEdit && (
+                                                <button onClick={() => router.push(`/menu/edit/${item.id}`)} className="px-4 py-2 bg-orange-500 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300">
+                                                    แก้ไข
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

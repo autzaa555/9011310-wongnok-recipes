@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from "react";
-
 import { useRouter } from 'next/navigation';
 import { Menu } from "@/app/interface/menu";
+import { useSession } from "next-auth/react";
 
 
 
@@ -28,6 +28,17 @@ function CreateItemForm({ params }: PageProps) {
   const [blog, setBlog] = useState<Menu[]>([]);
 
   const router = useRouter();
+
+
+  const session = useSession();
+    useEffect(() => {
+    //  console.log(session) 
+     if (session.status == "unauthenticated" ){ 
+      alert("กรุณาเข้าสู่ระบบก่อน!");
+     router.push("/login");
+     }
+    }, [session]);
+
   const [formData, setFormData] = useState<Menu>({
     id: 0,
     name: "",
@@ -59,9 +70,7 @@ function CreateItemForm({ params }: PageProps) {
       const fetchedData = await getBlog(params.slug);
       // console.log(fetchedData)
       setFormData(fetchedData[0])
-
     };
-
     fetchData();
   }, []);
 
@@ -222,7 +231,7 @@ function CreateItemForm({ params }: PageProps) {
               </div>
             </div>
             <button type="submit" className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              โพสต์สูตรอาหาร
+              อัพเดทสูตรอาหาร
             </button>
           </form>
         </div>
